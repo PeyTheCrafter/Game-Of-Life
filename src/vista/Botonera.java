@@ -2,6 +2,9 @@ package vista;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
 
 public class Botonera extends JPanel {
 	public JButton botones[][];
@@ -11,6 +14,7 @@ public class Botonera extends JPanel {
 	 * Create the panel.
 	 */
 	public Botonera(int lado) {
+		setBackground(Color.GRAY);
 		this.lado = lado;
 		crearBotones();
 	}
