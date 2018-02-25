@@ -10,13 +10,14 @@ public class GameOfLife {
 		super();
 		this.lado = lado;
 		crearTablero();
+		System.out.println("Tablero numérico de juego:");
 	}
 
-	private void crearTablero() {
+	public void crearTablero() {
 		this.tablero = new Casilla[this.lado][this.lado];
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j = 0; j < tablero.length; j++) {
-				tablero[i][j] = new Casilla(i, j);
+		for (int i = 0; i < this.tablero.length; i++) {
+			for (int j = 0; j < this.tablero.length; j++) {
+				this.tablero[i][j] = new Casilla(i, j);
 			}
 		}
 	}

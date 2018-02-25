@@ -7,12 +7,10 @@ import javax.swing.JButton;
 
 public class MyActionListenerTablero implements ActionListener {
 	ParaUI paraUI;
-	GameOfLife control;
 
-	public MyActionListenerTablero(ParaUI paraUI, GameOfLife control) {
+	public MyActionListenerTablero(ParaUI paraUI) {
 		super();
 		this.paraUI = paraUI;
-		this.control = control;
 	}
 
 	@Override
@@ -24,12 +22,11 @@ public class MyActionListenerTablero implements ActionListener {
 	}
 
 	private int[] interpretarCoordenadas(String coord) {
+		String[] coor = coord.split("-");
 		int[] coordenadas = new int[2];
-		int espacio = coord.indexOf(' ');
-		coordenadas[0] = Integer.valueOf(coord.substring(0, espacio));
-		coordenadas[1] = Integer.valueOf(coord.substring(espacio, coord.length()));
-		System.out.println(coordenadas[0]);
-		System.out.println(coordenadas[1]);
+		for (int i = 0; i < coor.length; i++) {
+			coordenadas[i] = Integer.valueOf(coor[i]);
+		}
 		return coordenadas;
 	}
 

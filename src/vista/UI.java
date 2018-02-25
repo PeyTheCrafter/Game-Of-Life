@@ -1,54 +1,82 @@
 package vista;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-
-import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.FlowLayout;
+import javax.swing.JButton;
+import java.awt.GridLayout;
 
 public class UI extends JFrame {
-	protected JPanel panelBotonera;
-	protected Tablero tablero;
+	private JPanel contentPane;
+	protected Botonera botonera;
+	protected JPanel panelControl;
+	protected JButton btnPlay;
+	protected JButton btnPause;
+	protected int lado = 20;
 
 	/**
 	 * Create the frame.
 	 */
 	public UI() {
+		// Estilo visual de windows.
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 450);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		getContentPane().setLayout(gridBagLayout);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		contentPane.setLayout(gbl_contentPane);
 
-		JPanel panelControl = new JPanel();
+		panelControl = new JPanel();
 		GridBagConstraints gbc_panelControl = new GridBagConstraints();
-		gbc_panelControl.insets = new Insets(0, 0, 5, 0);
+		gbc_panelControl.insets = new Insets(0, 0, 5, 5);
 		gbc_panelControl.fill = GridBagConstraints.BOTH;
-		gbc_panelControl.gridx = 0;
+		gbc_panelControl.gridx = 1;
 		gbc_panelControl.gridy = 0;
-		getContentPane().add(panelControl, gbc_panelControl);
-		panelControl.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		contentPane.add(panelControl, gbc_panelControl);
 
-		JButton btnPlay = new JButton("Play");
+		btnPlay = new JButton("Play");
 		panelControl.add(btnPlay);
 
-		JButton btnStop = new JButton("Stop");
-		panelControl.add(btnStop);
-		
-		panelBotonera = new Tablero();
-		GridBagConstraints gbc_panelBotonera = new GridBagConstraints();
-		gbc_panelBotonera.fill = GridBagConstraints.BOTH;
-		gbc_panelBotonera.gridx = 0;
-		gbc_panelBotonera.gridy = 1;
-		getContentPane().add(panelBotonera, gbc_panelBotonera);
+		btnPause = new JButton("Pause");
+		panelControl.add(btnPause);
+
+		botonera = new Botonera(this.lado);
+		GridBagConstraints gbc_botonera = new GridBagConstraints();
+		gbc_botonera.insets = new Insets(0, 0, 0, 5);
+		gbc_botonera.fill = GridBagConstraints.BOTH;
+		gbc_botonera.gridx = 1;
+		gbc_botonera.gridy = 1;
+		contentPane.add(botonera, gbc_botonera);
+		botonera.setLayout(new GridLayout(this.lado, this.lado, 0, 0));
 	}
-	
-	
+
 }
