@@ -14,7 +14,8 @@ public class Botonera extends JPanel {
 	 * Create the panel.
 	 */
 	public Botonera(int lado) {
-		setBackground(Color.GRAY);
+		setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		setBackground(Color.DARK_GRAY);
 		this.lado = lado;
 		crearBotones();
 	}
@@ -25,6 +26,10 @@ public class Botonera extends JPanel {
 			for (int j = 0; j < this.lado; j++) {
 				this.botones[i][j] = new JButton();
 				this.botones[i][j].setName(i + "-" + j);
+				this.botones[i][j].setOpaque(true);
+				this.botones[i][j].setContentAreaFilled(false);
+				this.botones[i][j].setBorderPainted(true);
+				this.botones[i][j].setBackground(Color.RED);
 				this.add(this.botones[i][j]);
 			}
 		}

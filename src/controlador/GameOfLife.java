@@ -13,6 +13,9 @@ public class GameOfLife {
 		System.out.println("Tablero numérico de juego:");
 	}
 
+	/**
+	 * Crea el tablero inicial.
+	 */
 	public void crearTablero() {
 		this.tablero = new Casilla[this.lado][this.lado];
 		for (int i = 0; i < this.tablero.length; i++) {
@@ -27,63 +30,68 @@ public class GameOfLife {
 	 * 
 	 * @param tablero
 	 */
-	public static void realizarComprobaciones(int[][][] tablero) {
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j = 0; j < tablero.length; j++) {
-				calcularVecinos(tablero, i, j);
+	public void realizarComprobaciones() {
+		for (int i = 0; i < this.tablero.length; i++) {
+			for (int j = 0; j < this.tablero.length; j++) {
+				calcularVecinos(i, j);
 			}
 		}
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j = 0; j < tablero.length; j++) {
-				comprobarCondiciones(tablero, i, j);
+		for (int i = 0; i < this.tablero.length; i++) {
+			for (int j = 0; j < this.tablero.length; j++) {
+				comprobarCondiciones(i, j);
 			}
 		}
 	}
 
-	public static void calcularVecinos(int[][][] tablero, int i, int j) {
-		int vecinos;
-		if (tablero[i][j][0] == 0) {
-			vecinos = 0;
-		} else {
-			vecinos = -1;
+	/**
+	 * Calcula los vecinos de una casilla. Se calcula sobre tablero y se modifica en
+	 * auxiliar.
+	 * 
+	 * @param x
+	 *            posición X.
+	 * @param y
+	 *            posición Y.
+	 */
+	public void calcularVecinos(int x, int y) {
+		int neighbours = 0;
+		if (this.tablero[x][y].isAlive()) {
+			neighbours = -1;
 		}
-		for (int k = -1; k <= 1; k++) {
-			for (int l = -1; l <= 1; l++) {
-				if ((i + k) >= 0 && (i + k) < tablero.length) {
-					if ((j + l) >= 0 && (j + l) < tablero.length) {
-						if (tablero[i + k][j + l][0] == 1) {
-							vecinos++;
-						}
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (i >= 0 && i < this.tablero.length && j >= 0 && j < this.tablero.length) {
+					if (this.tablero[i][j].isAlive()) {
+						neighbours++;
 					}
 				}
 			}
 		}
-		tablero[i][j][1] = vecinos;
+		this.tablero[x][y].setNeighbours(neighbours);
 	}
 
-	public static void comprobarCondiciones(int[][][] tablero, int i, int j) {
-		if (tablero[i][j][1] == 0) {
-			tablero[i][j][0] = 0;
+	/**
+	 * Comprueba las condiciones de vida de uan celda. Si tiene 0 ó 1 vecino, muere
+	 * por soledad. Si tiene 4 o más vecinos, muere por sobrepobración. Si tiene 2 ó
+	 * 3 vecinos, sobrevive. Si una celda muerta tiene 3 vecinos, para a estar viva.
+	 * 
+	 * @param x
+	 *            posición X.
+	 * @param y
+	 *            posicion Y.
+	 */
+	public void comprobarCondiciones(int x, int y) {
+		if(this.tablero[x][y].getNeighbours() == 0) {
+			this.tablero[x][y].setAlive(false);
 		}
-		if (tablero[i][j][1] == 1) {
-			tablero[i][j][0] = 0;
+		if (this.tablero[x][y].getNeighbours() == 1) {
+			this.tablero[x][y].setAlive(false);
 		}
-		if (tablero[i][j][1] >= 4) {
-			tablero[i][j][0] = 0;
+		if (this.tablero[x][y].getNeighbours() >= 4) {
+			this.tablero[x][y].setAlive(false);
 		}
-		if (tablero[i][j][1] == 3) {
-			tablero[i][j][0] = 1;
+		if (this.tablero[x][y].getNeighbours() == 3) {
+			this.tablero[x][y].setAlive(true);
 		}
-	}
 
-	public static void intercambiarTableros(int[][] tablero, int[][] tableroDos) {
-		int intercambio;
-		for (int i = 0; i < tableroDos.length; i++) {
-			for (int j = 0; j < tableroDos.length; j++) {
-				intercambio = tableroDos[i][j];
-				tableroDos[i][j] = tablero[i][j];
-				tablero[i][j] = intercambio;
-			}
-		}
 	}
 }

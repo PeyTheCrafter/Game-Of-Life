@@ -1,8 +1,5 @@
 package vista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -21,7 +18,8 @@ public class UI extends JFrame {
 	protected JPanel panelControl;
 	protected JButton btnPlay;
 	protected JButton btnPause;
-	protected int lado = 50;
+	protected JButton btnIterate;
+	protected int lado = 10;
 
 	/**
 	 * Create the frame.
@@ -51,7 +49,7 @@ public class UI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] {0, 0};
+		gbl_contentPane.columnWidths = new int[] { 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
@@ -71,6 +69,9 @@ public class UI extends JFrame {
 
 		btnPause = new JButton("Pause");
 		panelControl.add(btnPause);
+
+		btnIterate = new JButton("Iterate");
+		panelControl.add(btnIterate);
 
 		botonera = new Botonera(this.lado);
 		botonera.setBackground(Color.DARK_GRAY);
