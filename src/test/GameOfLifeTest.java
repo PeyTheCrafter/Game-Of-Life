@@ -1,4 +1,4 @@
-package controlador;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
+import controlador.GameOfLife;
 import modelo.Casilla;
 
 class GameOfLifeTest {

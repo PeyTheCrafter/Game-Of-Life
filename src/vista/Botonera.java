@@ -26,10 +26,10 @@ public class Botonera extends JPanel {
 			for (int j = 0; j < this.lado; j++) {
 				this.botones[i][j] = new JButton();
 				this.botones[i][j].setName(i + "-" + j);
-				this.botones[i][j].setOpaque(true);
+				this.botones[i][j].setBorder(new LineBorder(Color.BLACK, 1));
+				this.botones[i][j].setOpaque(false);
+				this.botones[i][j].setForeground(Color.WHITE);
 				this.botones[i][j].setContentAreaFilled(false);
-				this.botones[i][j].setBorderPainted(true);
-				this.botones[i][j].setBackground(Color.RED);
 				this.add(this.botones[i][j]);
 			}
 		}

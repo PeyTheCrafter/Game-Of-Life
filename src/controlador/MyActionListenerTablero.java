@@ -7,10 +7,12 @@ import javax.swing.JButton;
 
 public class MyActionListenerTablero implements ActionListener {
 	ParaUI paraUI;
+	GameOfLife game;
 
-	public MyActionListenerTablero(ParaUI paraUI) {
+	public MyActionListenerTablero(ParaUI paraUI, GameOfLife game) {
 		super();
 		this.paraUI = paraUI;
+		this.game = game;
 	}
 
 	@Override
@@ -18,7 +20,8 @@ public class MyActionListenerTablero implements ActionListener {
 		JButton boton = (JButton) e.getSource();
 		String name = boton.getName();
 		int[] coordenadas = interpretarCoordenadas(name);
-		paraUI.cambiarCasilla(coordenadas[0], coordenadas[1]);
+		game.cambiarCasilla(coordenadas[0], coordenadas[1]);
+		paraUI.actualizarTablero();
 	}
 
 	private int[] interpretarCoordenadas(String coord) {

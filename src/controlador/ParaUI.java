@@ -1,15 +1,17 @@
 package controlador;
 
+import java.awt.Color;
+
 import vista.UI;
 
 public class ParaUI extends UI {
 	GameOfLife game = new GameOfLife(this.lado);
-	MyActionListenerTablero listenerTablero = new MyActionListenerTablero(this);
+	MyActionListenerTablero listenerTablero = new MyActionListenerTablero(this, game);
 	MyActionListenerIterate listenerIterate = new MyActionListenerIterate(this, game);
 
 	public ParaUI() {
 		super();
-		this.lado = 10;
+		this.lado = 100;
 		actualizarTablero();
 		this.btnIterate.addActionListener(listenerIterate);
 		for (int i = 0; i < this.botonera.botones.length; i++) {
@@ -24,21 +26,14 @@ public class ParaUI extends UI {
 			for (int j = 0; j < this.game.tablero.length; j++) {
 				if (this.game.tablero[i][j].isAlive()) {
 					this.botonera.botones[i][j].setText("o");
+					this.botonera.botones[i][j].setBackground(Color.WHITE);
 				} else {
-					this.botonera.botones[i][j].setText("·");
+					this.botonera.botones[i][j].setText("");
+					this.botonera.botones[i][j].setBackground(Color.DARK_GRAY);
 				}
 			}
 		}
 		mostrarTablero();
-	}
-
-	public void cambiarCasilla(int x, int y) {
-		if (this.game.tablero[x][y].isAlive()) {
-			this.game.tablero[x][y].setAlive(false);
-		} else {
-			this.game.tablero[x][y].setAlive(true);
-		}
-		actualizarTablero();
 	}
 
 	public void mostrarTablero() {

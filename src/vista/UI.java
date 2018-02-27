@@ -19,7 +19,7 @@ public class UI extends JFrame {
 	protected JButton btnPlay;
 	protected JButton btnPause;
 	protected JButton btnIterate;
-	protected int lado = 10;
+	protected int lado = 25;
 
 	/**
 	 * Create the frame.

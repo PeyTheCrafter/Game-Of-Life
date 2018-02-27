@@ -24,6 +24,14 @@ public class GameOfLife {
 			}
 		}
 	}
+	
+	public void cambiarCasilla(int x, int y) {
+		if (this.tablero[x][y].isAlive()) {
+			this.tablero[x][y].setAlive(false);
+		} else {
+			this.tablero[x][y].setAlive(true);
+		}
+	}
 
 	/**
 	 * Realiza todas las comprobaciones para cada casilla
@@ -53,20 +61,20 @@ public class GameOfLife {
 	 *            posición Y.
 	 */
 	public void calcularVecinos(int x, int y) {
-		int neighbours = 0;
+		int vecinos = 0;
 		if (this.tablero[x][y].isAlive()) {
-			neighbours = -1;
+			vecinos = -1;
 		}
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (i >= 0 && i < this.tablero.length && j >= 0 && j < this.tablero.length) {
 					if (this.tablero[i][j].isAlive()) {
-						neighbours++;
+						vecinos++;
 					}
 				}
 			}
 		}
-		this.tablero[x][y].setNeighbours(neighbours);
+		this.tablero[x][y].setNeighbours(vecinos);
 	}
 
 	/**
@@ -80,7 +88,7 @@ public class GameOfLife {
 	 *            posicion Y.
 	 */
 	public void comprobarCondiciones(int x, int y) {
-		if(this.tablero[x][y].getNeighbours() == 0) {
+		if (this.tablero[x][y].getNeighbours() == 0) {
 			this.tablero[x][y].setAlive(false);
 		}
 		if (this.tablero[x][y].getNeighbours() == 1) {
