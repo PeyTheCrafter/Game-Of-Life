@@ -19,7 +19,8 @@ public class UI extends JFrame {
 	protected JButton btnPlay;
 	protected JButton btnPause;
 	protected JButton btnIterate;
-	protected int lado = 25;
+	protected int lado = 100;
+	protected JButton btnReset;
 
 	/**
 	 * Create the frame.
@@ -72,6 +73,9 @@ public class UI extends JFrame {
 
 		btnIterate = new JButton("Iterate");
 		panelControl.add(btnIterate);
+		
+		btnReset = new JButton("Reset");
+		panelControl.add(btnReset);
 
 		botonera = new Botonera(this.lado);
 		botonera.setBackground(Color.DARK_GRAY);

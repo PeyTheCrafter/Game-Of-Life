@@ -24,7 +24,15 @@ public class GameOfLife {
 			}
 		}
 	}
-	
+
+	public void reiniciarTablero() {
+		for (int i = 0; i < this.tablero.length; i++) {
+			for (int j = 0; j < this.tablero.length; j++) {
+				this.tablero[i][j].setAlive(false);
+			}
+		}
+	}
+
 	public void cambiarCasilla(int x, int y) {
 		if (this.tablero[x][y].isAlive()) {
 			this.tablero[x][y].setAlive(false);
